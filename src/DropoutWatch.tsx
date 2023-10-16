@@ -1,11 +1,9 @@
-import { BrowserRouter } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
 import { AppRouter } from "./router/AppRouter";
 
 const DropoutWatch = () => {
   return (
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+    <RouterProvider router={AppRouter}/>
   );
 };
 
