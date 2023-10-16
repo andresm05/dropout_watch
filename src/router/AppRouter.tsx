@@ -9,9 +9,9 @@ import { Home } from "../pages";
 const AppRouter = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/">
+      <Route path="/" errorElement={<Navigate to={"/"} />}>
         <Route index element={<Home />} />
-        <Route path="*" element={<Navigate to={"/"} />} />
+        {/* <Route path="contacts" element={<div>Contacts</div>} /> */}
       </Route>
     </>
   )
