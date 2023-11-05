@@ -1,7 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Home = () => {
   const [hovered, setHovered] = useState(false);
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setHovered(true);
@@ -9,6 +12,11 @@ const Home = () => {
 
   const handleMouseLeave = () => {
     setHovered(false);
+  };
+
+  const handleButtonClick = () => {
+    // Redirige al componente Button
+    navigate("/Dashboard");
   };
 
   return (
@@ -41,6 +49,7 @@ const Home = () => {
         <span>
           Prevention
           <button
+            onClick={handleButtonClick}
             className="btn btn-primary"
             style={{
               border: "2px solid black",
