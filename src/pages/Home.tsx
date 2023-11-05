@@ -25,17 +25,14 @@ const Home = () => {
       <h1 className="text-center">
         <span
           className="display-2"
-          style={{ color: hovered ? 'white' : 'black' }}
+          style={{ color: hovered ? "white" : "black" }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-         Dropout
+          Dropout
         </span>
-        <span> </span> 
-        <span
-          style={{ color: 'black' }} 
-          className="text-xl"
-        >
+        <span> </span>
+        <span style={{ color: "black" }} className="text-xl">
           Watch
         </span>
       </h1>
@@ -43,17 +40,23 @@ const Home = () => {
         <span> </span>
         <span>
           Prevention
-          <button className="btn btn-primary" style={{ border: '2px solid black', background: 'transparent', color:"black", margin: '20px', fontFamily:'revert'}}>
+          <button
+            className="btn btn-primary"
+            style={{
+              border: "2px solid black",
+              background: "transparent",
+              color: "black",
+              margin: "20px",
+              fontFamily: "revert",
+            }} 
+          >
             Begins with
           </button>
-
           prediction
         </span>
-        </h1>
+      </h1>
     </div>
-    
   );
 };
 
 export { Home };
-
