@@ -1,6 +1,27 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
+import { useDropouts } from "../hooks/useDropouts";
+import { Traitors } from "../traitors/traitors.types";
+
 const Profile = () => {
+  const { getTraitors } = useDropouts();
+  const [traitors, setTraitors] = useState<Traitors | null>(null);
+
+  useEffect(() => {
+    const loadTraitors = async () => {
+      const data = await getTraitors();
+      if (data) {
+        setTraitors(data);
+      }
+    };
+
+    loadTraitors();
+    console.log(traitors);
+  }, []);
+
   return (
-    <div >
+
+    <div>
       <nav className="navbar bg-body-tertiary ml-2">
         <div className="container">
           <div className="d-flex align-items-center">
@@ -17,8 +38,6 @@ const Profile = () => {
           </div>
         </div>
       </nav>
-
-
     </div>
   );
 };
