@@ -19,11 +19,11 @@ const Dashboard = () => {
       };
 
       const handleCreateProfileClick = () => {
-        if (selectedVariables.length >= 2) {
+        if (selectedVariables.length >= 3) {
 
         navigator('/Profile');
         } else {
-          setErrorMessage('¡Por favor selecciona al menos dos variables!');
+          setErrorMessage('¡Por favor selecciona tres  variables!');
         }
       };
 
