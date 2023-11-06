@@ -1,4 +1,32 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 const Dashboard = () => {
+    const [selectedVariables, setSelectedVariables] = useState<string[]>([]);
+    const [errorMessage, setErrorMessage] = useState<string>('');
+
+    const navigator = useNavigate();
+    const handleVariableClick = (variable: string) => {
+        if (selectedVariables.includes(variable)) {
+          setSelectedVariables(selectedVariables.filter((v) => v !== variable));
+        } else {
+          if (selectedVariables.length < 3) {
+            setSelectedVariables([...selectedVariables, variable]);
+          } else {
+            setErrorMessage('¡No puedes seleccionar más de 3 variables!');
+          }
+        }
+      };
+
+      const handleCreateProfileClick = () => {
+        if (selectedVariables.length >= 2) {
+
+        navigator('/Profile');
+        } else {
+          setErrorMessage('¡Por favor selecciona al menos dos variables!');
+        }
+      };
+
   return (
     <div className="container">
       <nav className="navbar bg-body-tertiary ml-2">
@@ -38,11 +66,12 @@ const Dashboard = () => {
         </div>
 
         <div className="card-body"> 
-          <p className="card-text ">
-            *Porfavor selecciona minimo dos y máximo tres variables.
-          </p>
+          <p className="card-text text-danger">{errorMessage}</p>
           <div className="d-grid gap-2 col-6 mx-auto">
-            <button className="btn btn-dark" type="button">
+            <button 
+            className={`btn btn-light ${selectedVariables.includes('Carrera') ? 'btn btn-dark' : ''}`}
+            type="button"
+            onClick={() => handleVariableClick('Carrera')}>
               <img
                 src="src/images/brain.png"
                 alt="Icono"
@@ -52,7 +81,9 @@ const Dashboard = () => {
               />
               <span> Carrera universitaria</span>
             </button>
-            <button className="btn btn-dark" type="button">
+            <button className={`btn btn-light ${selectedVariables.includes('Semestre') ? 'btn btn-dark' : ''}`}
+          type="button"
+          onClick={() => handleVariableClick('Semestre')}>
               <span> Semestre</span>
 
               <img
@@ -63,7 +94,9 @@ const Dashboard = () => {
                 className="mr-1"
               />
             </button>
-            <button className="btn btn-dark" type="button">
+            <button className={`btn btn-light ${selectedVariables.includes('Estrato') ? 'btn btn-dark' : ''}`}
+          type="button"
+          onClick={() => handleVariableClick('Estrato')}>
               <img
                 src="src/images/school.png"
                 alt="Icono"
@@ -73,7 +106,9 @@ const Dashboard = () => {
               />
               <span> Estrato social</span>
             </button>
-            <button className="btn btn-dark " type="button">
+            <button className={`btn btn-light ${selectedVariables.includes('Modalidad') ? 'btn btn-dark' : ''}`}
+          type="button"
+          onClick={() => handleVariableClick('Modalidad')}>
               <span> Modalidad </span>
 
               <img
@@ -87,12 +122,12 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="card text-body-secondary border-0">
-          <button className="btn btn-light" type="button">
+          <button className="btn btn-light" type="button"  onClick={handleCreateProfileClick}>
             <img
               src="src/images/profile.png"
               alt="Icono"
               width="30"
-              height=""
+              height="30"
             />
             <p>Crear perfil</p>
           </button>
