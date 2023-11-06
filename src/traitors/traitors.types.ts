@@ -4,4 +4,5 @@ export interface Traitors {
     economicLevel: number[];
     campus:        string[];
     programs:      string[];
+    modalities:    string[];
 }
