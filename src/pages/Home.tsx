@@ -40,7 +40,7 @@ const Home = () => {
           Dropout
         </span>
         <span> </span>
-        <span style={{ color: "black" }} className="text-xl">
+        <span style={{ color: "black" }} className="text-xl text-primary">
           Watch
         </span>
       </h1>
@@ -50,7 +50,7 @@ const Home = () => {
           Prevention
           <button
             onClick={handleButtonClick}
-            className="btn btn-primary"
+            className="btn btn-primary text-primary border-primary fw-bold"
             style={{
               border: "2px solid black",
               background: "transparent",

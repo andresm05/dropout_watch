@@ -7,6 +7,7 @@ import {
 import { Home } from "../pages";
 import {Dashboard} from "../pages";
 
+
 const AppRouter = createBrowserRouter(
   createRoutesFromElements(
     <>
