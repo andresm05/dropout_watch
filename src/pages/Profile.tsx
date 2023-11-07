@@ -85,6 +85,9 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      <div className=" d-flex justify-content-center col-2 mx-auto mt-3">
+      <button type="button" className="btn btn-dark ">Dark</button>
+      </div>
     </div>
   );
 };

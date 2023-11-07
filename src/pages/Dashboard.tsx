@@ -121,7 +121,7 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
-        <div className="card text-body-secondary border-0">
+        <div className="text-body-secondary border-0">
           <button className="btn btn-light" type="button"  onClick={handleCreateProfileClick}>
             <img
               src="src/images/profile.png"
