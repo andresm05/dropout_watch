@@ -45,7 +45,7 @@ const Home = () => {
         </span>
       </h1>
       <h1 className="text-center mt-5">
-        <span> </span>
+        <span></span>
         <span>
           Prevention
           <button
