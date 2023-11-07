@@ -26,7 +26,7 @@ const Profile = () => {
         <div className="container">
           <div className="d-flex align-items-center">
             <img
-              src="src\images\DropoutWatchLogo.png"
+              src="images\DropoutWatchLogo.png"
               alt="Logo"
               width="80"
               height="80"

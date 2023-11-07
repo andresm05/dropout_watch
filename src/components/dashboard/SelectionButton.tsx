@@ -37,7 +37,7 @@ export const SelectionButton = ({
       {left ? (
         <>
           <img
-            src={`src/images/${icon}`}
+            src={`images/${icon}`}
             alt="Icono"
             width="30"
             height="30"
@@ -49,7 +49,7 @@ export const SelectionButton = ({
         <>
           <span>{name}</span>
           <img
-            src={`src/images/${icon}`}
+            src={`images/${icon}`}
             alt="Icono"
             width="30"
             height="30"

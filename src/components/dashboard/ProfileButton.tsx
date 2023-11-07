@@ -25,7 +25,7 @@ const ProfileButton = ({
 
   return (
     <button className="btn btn-light" onClick={handleCreateProfileClick}>
-      <img src={`src/images/${icon}`} alt="Icono" width="30" height="30" />
+      <img src={`images/${icon}`} alt="Icono" width="30" height="30" />
       <p>{name}</p>
     </button>
   );
