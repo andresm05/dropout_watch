@@ -3,11 +3,16 @@ import { useEffect, useState } from "react";
 import { useDropouts } from "../hooks/useDropouts";
 import { Traitors } from "../traitors/traitors.types";
 import { Loadings } from "../helpers/Loadings";
+import { useParams } from "react-router-dom";
+
 
 const Profile = () => {
   const { getTraitors } = useDropouts();
   const [traitors, setTraitors] = useState<Traitors | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
+  const { selectedVariables } = useParams();
+  const variablesArray = selectedVariables ? selectedVariables.split('-') : [];
+
 
   useEffect(() => {
     const loadTraitors = async () => {
@@ -26,8 +31,8 @@ const Profile = () => {
         <div className="container">
           <div className="d-flex align-items-center">
             <img
-              src="images\DropoutWatchLogo.png"
-              alt="Logo"
+          src="\images\DropoutWatchLogo.png"
+              alt="Logo"  
               width="80"
               height="80"
               className="d-inline-block"
@@ -48,8 +53,8 @@ const Profile = () => {
         <div className="card-group mx-5">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
+         <h5 className="card-title">{variablesArray[0] ? variablesArray[0] : 'Card title'}</h5>
+            <p className="card-text">
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
                 longer.
@@ -63,7 +68,7 @@ const Profile = () => {
           </div>
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Card title</h5>
+            <h5 className="card-title">{variablesArray[1] ? variablesArray[1] : 'Card title'}</h5>
               <p className="card-text">
                 This card has supporting text below as a natural lead-in to
                 additional content.
@@ -77,7 +82,7 @@ const Profile = () => {
           </div>
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Card title</h5>
+            <h5 className="card-title">{variablesArray[2] ? variablesArray[2] : 'Card title'}</h5>
               <p className="card-text">
                 This is a wider card with supporting text below as a natural
                 lead-in to additional content. This card has even longer content

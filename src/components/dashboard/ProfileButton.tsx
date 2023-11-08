@@ -14,10 +14,11 @@ const ProfileButton = ({
   icon,
 }: ProfileButtonProps) => {
   const navigator = useNavigate();
+  const selectedVariablesString = selectedVariables.join('-');
 
   const handleCreateProfileClick = () => {
     if (selectedVariables.length >= 3) {
-      navigator("/Profile");
+      navigator(`/Profile/${selectedVariablesString}`);
     } else {
       setErrorMessage("¡Por favor selecciona tres  variables!");
     }
