@@ -13,8 +13,8 @@ const AppRouter = createBrowserRouter(
     <>
       <Route index element={<Home />} />
       <Route path="Dashboard" element={<Dashboard />} />
-      <Route path="Profile" element={<Profile />} />
-      {/* <Route path="contacts" element={<div>Contacts</div>} /> */}
+      <Route path="Profile/:selectedVariables" element={<Profile />} />
+{/* <Route path="contacts" element={<div>Contacts</div>} /> */}
 
     </>
   )
