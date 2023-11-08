@@ -11,6 +11,11 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { selectedVariables } = useParams();
   const variablesArray = selectedVariables ? selectedVariables.split("-") : [];
+  const [showCards, setShowCards] = useState(false);
+
+  const handleCreateProfile = () => {
+    setShowCards(true);
+  };
 
   useEffect(() => {
     const loadTraitors = async () => {
@@ -44,9 +49,15 @@ const Profile = () => {
 
       {isLoading ? (
         <div className="d-flex flex-column justify-content-center align-items-center">
-          <Loadings type="cylon" color="#0d6efd
-" />
-          <h1 className="display-6">" No canceles compa, <span className="text-primary ">LÚCHALA </span> "</h1>
+          <Loadings
+            type="cylon"
+            color="#0d6efd
+"
+          />
+          <h1 className="display-6">
+            " No canceles compa, <span className="text-primary ">LÚCHALA </span>{" "}
+            "
+          </h1>
         </div>
       ) : (
         <div className="container">
@@ -98,7 +109,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="card text-body-secondary border-0">
-            <button className="btn btn-light">
+            <button className="btn btn-light" onClick={handleCreateProfile}>
               <img
                 src="\images\profile.png"
                 alt="Icono"
@@ -108,8 +119,52 @@ const Profile = () => {
               <p>Crear perfil</p>
             </button>
           </div>
+          {showCards && (
+            <div className="row mt-4 mb-4">
+              <div className="col-sm-6 mb-3 mb-sm-0">
+                <div className="card">
+                  <div className="card-body text-center">
+                    <div>
+                      <img
+                        className="rounded-circle "
+                        src="\images\profile.png"
+                        alt="Icono"
+                        width="80"
+                        height="80"
+                      />
+                    </div>
+                    <h5 className="card-title">Nombre: Pepito Muñoz </h5>
+                    <p className="card-text">
+                      Carrera Universitaria: <br/>
+                      Edad: años<br />
+                      Ciudad: xx <br />
+                      Estado: xx <br />
+                      Tipo de sangre: xx <br />
+                      Promedio: xx <br />
+                      Horas que dormia: xx <br />
+                      Vio clases con Roberto? : F/V <br />
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="col-sm-6">
+                <div className="card text-center">
+                  <div className="card-body">
+                    <h5 className="card-title">Estadisticas</h5>
+                    <p className="card-text">
+                      With supporting text below as a natural lead-in to
+                      additional content.
+                    </p>
+                    <a href="#" className="btn btn-primary">
+                      Go somewhere
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      )}  
+      )}
     </div>
   );
 };
