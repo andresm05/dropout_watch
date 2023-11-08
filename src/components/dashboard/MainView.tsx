@@ -27,7 +27,7 @@ export const MainView = () => {
           setSelectedVariables={setSelectedVariables}
         />
       </div>
-      <div className="card text-body-secondary border-0">
+      <div className="card text-body-secondary border-0 col-7 mx-auto">
         <ProfileButton
           icon="profile.png"
           selectedVariables={selectedVariables}
