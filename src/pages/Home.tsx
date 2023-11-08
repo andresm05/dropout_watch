@@ -23,7 +23,7 @@ const Home = () => {
     <div className="container">
       <a className="navbar-brand" href="#">
         <img
-          src="src\images\DropoutWatchLogo.png"
+          src="images\DropoutWatchLogo.png"
           alt="Bootstrap"
           width="180"
           height="180"
