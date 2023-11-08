@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const Home = () => {
   const [hovered, setHovered] = useState(false);
   const navigate = useNavigate();
@@ -32,17 +31,14 @@ const Home = () => {
       </a>
       <h1 className="text-center">
         <span
-          className="display-2"
-          style={{ color: hovered ? "white" : "black" }}
+          className={`display-2 ${hovered ? "text-white" : "text-black"}`}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
           Dropout
         </span>
         <span> </span>
-        <span style={{ color: "black" }} className="text-xl text-primary">
-          Watch
-        </span>
+        <span className="text-xl text-primary">Watch</span>
       </h1>
       <h1 className="text-center mt-5">
         <span></span>
@@ -50,14 +46,7 @@ const Home = () => {
           Prevention
           <button
             onClick={handleButtonClick}
-            className="btn btn-primary text-primary border-primary fw-bold"
-            style={{
-              border: "2px solid black",
-              background: "transparent",
-              color: "black",
-              margin: "20px",
-              fontFamily: "revert",
-            }} 
+            className="btn btn-outline-primary border-primary fw-bold border border-2 mx-2"
           >
             Begins with
           </button>
