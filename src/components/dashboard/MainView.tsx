@@ -31,7 +31,7 @@ export const MainView = () => {
         <ProfileButton
           icon="profile.png"
           selectedVariables={selectedVariables}
-          name="Crear perfil"
+          name="Iniciar perfil"
           setErrorMessage={setErrorMessage}
         />
       </div>
