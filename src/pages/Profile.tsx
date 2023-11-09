@@ -1,20 +1,62 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDropouts } from "../hooks/useDropouts";
-import { Traitors } from "../traitors/traitors.types";
+import { Traitors, TraitorsForm, TraitorsTernary } from "../utilities";
 import { Loadings } from "../helpers/Loadings";
 import { useParams } from "react-router-dom";
+import { VariableOptions } from "../components";
+import { useForm } from "../hooks/useForm";
+import { pathOptions } from "../constants/variables";
+import { setPath } from "../helpers";
 
 const Profile = () => {
-  const { getTraitors } = useDropouts();
-  const [traitors, setTraitors] = useState<Traitors | undefined>(undefined);
-  const [isLoading, setIsLoading] = useState(true);
   const { selectedVariables } = useParams();
-  const variablesArray = selectedVariables ? selectedVariables.split("-") : [];
+  const { getTraitors, getTraitorsByTernary } = useDropouts();
+  const [traitors, setTraitors] = useState<Traitors | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
   const [showCards, setShowCards] = useState(false);
+  const [traitorProfile, setTraitorProfile] = useState<
+    TraitorsTernary | undefined
+  >();
+  const [showInfo, setShowInfo] = useState(false);
+  const variablesArray = selectedVariables ? selectedVariables.split("-") : [];
+  const [var1, var2, var3] = variablesArray;
 
-  const handleCreateProfile = () => {
-    setShowCards(true);
+  const initialValues: TraitorsForm = {
+    programs: "",
+    economicLevel: -1,
+    modalities: "",
+    maxSemester: -1,
+  };
+
+  const { values, handleFieldChange } = useForm(initialValues);
+
+  const handleCreateProfile = async () => {
+    let pathCondition = "";
+    pathOptions.forEach((element) => {
+      if (
+        element.ternary.has(var1) &&
+        element.ternary.has(var2) &&
+        element.ternary.has(var3)
+      ) {
+        pathCondition = element.path;
+      }
+    });
+
+    const fullpath = setPath(pathCondition, values);
+    console.log(fullpath);
+    const profile = await getTraitorsByTernary(fullpath);
+    if (profile) {
+      setTraitorProfile(profile);
+      console.log(profile);
+      if (profile.totalTraitors > 0) {
+        setShowCards(true);
+        setShowInfo(false);
+      }else{
+        setShowCards(false);
+        setShowInfo(true);
+      }
+    }
   };
 
   useEffect(() => {
@@ -73,25 +115,25 @@ const Profile = () => {
             <div className="card border-0">
               <div className="card-body">
                 <button className="btn btn-light border">
-                  <h5 className="card-title text-primary fw-bold">
-                    {variablesArray[0] ? variablesArray[0] : "Card title"}
-                  </h5>
+                  <h5 className="card-title text-primary fw-bold">{var1}</h5>
                 </button>
-                <p className="card-text ">
-                  Aquí va el dropdown de la variable 1
-                </p>
+                <VariableOptions
+                  traitors={traitors}
+                  variable={var1}
+                  handleFieldChange={handleFieldChange}
+                />
               </div>
             </div>
             <div className="card border-0">
               <div className="card-body">
                 <button className="btn btn-light border">
-                  <h5 className="card-title text-primary fw-bold">
-                    {variablesArray[1] ? variablesArray[1] : "Card title"}
-                  </h5>
+                  <h5 className="card-title text-primary fw-bold">{var2}</h5>
                 </button>
-                <p className="card-text ">
-                  Aquí va el dropdown de la variable 2
-                </p>
+                <VariableOptions
+                  traitors={traitors}
+                  variable={var2}
+                  handleFieldChange={handleFieldChange}
+                />
               </div>
             </div>
             <div className="card border-0">
@@ -101,10 +143,11 @@ const Profile = () => {
                     {variablesArray[2] ? variablesArray[2] : "Card title"}
                   </h5>
                 </button>
-
-                <p className="card-text ">
-                  Aquí va el dropdown de la variable 3
-                </p>
+                <VariableOptions
+                  traitors={traitors}
+                  variable={var3}
+                  handleFieldChange={handleFieldChange}
+                />
               </div>
             </div>
           </div>
@@ -135,9 +178,17 @@ const Profile = () => {
                     </div>
                     <h5 className="card-title">Nombre: Pepito Muñoz </h5>
                     <p className="card-text">
-                      Carrera Universitaria: <br/>
-                      Edad: años<br />
-                      Ciudad: xx <br />
+                      Carrera Universitaria:
+                      {traitorProfile?.nom_unidad_acad_matriculado}
+                      <br />
+                      Edad: años
+                      <br />
+                      Ciudad:{" "}
+                      {traitorProfile?.modalitiesPorc?.map(
+                        (mod) => mod.category
+                      )}{" "}
+                      <br />
+                      <br />
                       Estado: xx <br />
                       Tipo de sangre: xx <br />
                       Promedio: xx <br />
@@ -160,6 +211,16 @@ const Profile = () => {
                     </a>
                   </div>
                 </div>
+              </div>
+            </div>
+          )}
+          {showInfo && (
+            <div className="card text-body-secondary border-0">
+              <div className="card-body">
+                <h5 className="card-title">Información</h5>
+                <p className="card-text">
+                  There is no profile that fullfil the conditions
+                </p>
               </div>
             </div>
           )}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { dropoutWatchApi } from "../api";
 import { AxiosError } from "axios";
-import { Traitors, TraitorsTernary } from "../traitors";
+import { Traitors, TraitorsTernary } from "../utilities";
 import Swal from "sweetalert2";
 
 export const useDropouts = () => {
