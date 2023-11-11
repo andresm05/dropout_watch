@@ -28,14 +28,10 @@ const TraitorProfile = ({
           <div className="card-body">
             <div className="border border-light border border-2 rounded m-2">
               <span className="fw-bold me-2 card-text">Unidad Académica:</span>
-              {pathCondition === "sme" ? (
-                <>
-                  {fitProfile?.InfluentialElementsPrograms.map((program) => (
-                    <span>{program.category} </span>
-                  ))}
-                </>
-              ) : (
-                <span>{traitorProfile?.nom_unidad_acad_matriculado}</span>
+              {traitorProfile?.nom_unidad_acad_matriculado.map(
+                (unidadAcad) => (
+                  <span>{unidadAcad} </span>
+                )
               )}
             </div>
             <div className="border border-light border border-2 rounded m-2">

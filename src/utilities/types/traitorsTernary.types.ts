@@ -1,7 +1,7 @@
 export interface TraitorsTernary {
     ok:                          boolean;
     totalTraitors:               number;
-    nom_unidad_acad_matriculado: string;
+    nom_unidad_acad_matriculado: string[];
     typeOfAdmissionsPorc:        ElementPorc[];
     campusPorc:                  ElementPorc[];
     programsPrc?:                 ElementPorc[];
