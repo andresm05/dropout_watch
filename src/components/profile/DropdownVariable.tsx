@@ -1,4 +1,4 @@
-import { Traitors } from "../../utilities/traitors.types";
+import { Traitors } from "../../utilities";
 interface DropdownVariableProps {
   traitors: Traitors | undefined;
   field: "programs" | "economicLevel" | "modalities";

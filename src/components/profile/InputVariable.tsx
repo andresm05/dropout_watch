@@ -1,4 +1,4 @@
-import { Traitors } from "../../utilities/traitors.types";
+import { Traitors } from "../../utilities/types/traitors.types";
 
 interface InputVariableProps {
   traitors: Traitors | undefined;

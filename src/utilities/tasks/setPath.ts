@@ -1,4 +1,4 @@
-import { TraitorsForm } from "../utilities";
+import { TraitorsForm } from "..";
 
 export const setPath = (path: string, values:TraitorsForm) => {
     const { economicLevel, maxSemester, modalities, programs } = values;

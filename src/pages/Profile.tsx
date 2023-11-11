@@ -1,58 +1,59 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useDropouts } from "../hooks/useDropouts";
-import { Traitors, TraitorsForm, TraitorsTernary } from "../utilities";
+import {
+  Traitors,
+  TraitorsForm,
+  TraitorsTernary,
+  getPathCondition,
+} from "../utilities";
 import { Loadings } from "../helpers/Loadings";
 import { useParams } from "react-router-dom";
 import { VariableOptions } from "../components";
 import { useForm } from "../hooks/useForm";
-import { pathOptions } from "../constants/variables";
 import { setPath } from "../helpers";
+import { InfluentialElements, getInfluentialElements } from "../utilities/tasks/getInfluentialElements";
 
 const Profile = () => {
   const { selectedVariables } = useParams();
   const { getTraitors, getTraitorsByTernary } = useDropouts();
   const [traitors, setTraitors] = useState<Traitors | undefined>();
+  const [pathCondition, setPathCondition] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [showCards, setShowCards] = useState(false);
   const [traitorProfile, setTraitorProfile] = useState<
     TraitorsTernary | undefined
   >();
+  const [fitProfile, setFitProfile] = useState<InfluentialElements>();
   const [showInfo, setShowInfo] = useState(false);
-  const variablesArray = selectedVariables ? selectedVariables.split("-") : [];
-  const [var1, var2, var3] = variablesArray;
+  const [var1, var2, var3] = selectedVariables
+    ? selectedVariables.split("-")
+    : [];
 
   const initialValues: TraitorsForm = {
     programs: "",
     economicLevel: -1,
     modalities: "",
-    maxSemester: -1,
+    maxSemester: 0,
   };
 
   const { values, handleFieldChange } = useForm(initialValues);
 
   const handleCreateProfile = async () => {
-    let pathCondition = "";
-    pathOptions.forEach((element) => {
-      if (
-        element.ternary.has(var1) &&
-        element.ternary.has(var2) &&
-        element.ternary.has(var3)
-      ) {
-        pathCondition = element.path;
-      }
-    });
+    const pathCond = getPathCondition(var1, var2, var3);
+    setPathCondition(pathCond);
 
-    const fullpath = setPath(pathCondition, values);
+    const fullpath = setPath(pathCond, values);
     console.log(fullpath);
     const profile = await getTraitorsByTernary(fullpath);
     if (profile) {
       setTraitorProfile(profile);
+      setFitProfile(getInfluentialElements(profile));
       console.log(profile);
       if (profile.totalTraitors > 0) {
         setShowCards(true);
         setShowInfo(false);
-      }else{
+      } else {
         setShowCards(false);
         setShowInfo(true);
       }
@@ -139,9 +140,7 @@ const Profile = () => {
             <div className="card border-0">
               <div className="card-body">
                 <button className="btn btn-light border ">
-                  <h5 className="card-title text-primary fw-bold">
-                    {variablesArray[2] ? variablesArray[2] : "Card title"}
-                  </h5>
+                  <h5 className="card-title text-primary fw-bold">{var3}</h5>
                 </button>
                 <VariableOptions
                   traitors={traitors}
@@ -181,7 +180,10 @@ const Profile = () => {
                       Carrera Universitaria:
                       {traitorProfile?.nom_unidad_acad_matriculado}
                       <br />
-                      Edad: años
+                      Edad: {fitProfile?.influentialElementsCampus?.map(
+                        (camp) => camp.category
+                      )}{" "}
+
                       <br />
                       Ciudad:{" "}
                       {traitorProfile?.modalitiesPorc?.map(
