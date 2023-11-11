@@ -2,17 +2,18 @@
 import { useEffect, useState } from "react";
 import { useDropouts } from "../hooks/useDropouts";
 import {
+  InfluentialElements,
   Traitors,
   TraitorsForm,
   TraitorsTernary,
+  getInfluentialElements,
   getPathCondition,
 } from "../utilities";
 import { Loadings } from "../helpers/Loadings";
 import { useParams } from "react-router-dom";
-import { VariableOptions } from "../components";
+import { TraitorProfile, VariableOptions } from "../components";
 import { useForm } from "../hooks/useForm";
 import { setPath } from "../helpers";
-import { InfluentialElements, getInfluentialElements } from "../utilities/tasks/getInfluentialElements";
 
 const Profile = () => {
   const { selectedVariables } = useParams();
@@ -163,43 +164,11 @@ const Profile = () => {
           </div>
           {showCards && (
             <div className="row mt-4 mb-4">
-              <div className="col-sm-6 mb-3 mb-sm-0">
-                <div className="card">
-                  <div className="card-body text-center">
-                    <div>
-                      <img
-                        className="rounded-circle "
-                        src="\images\profile.png"
-                        alt="Icono"
-                        width="80"
-                        height="80"
-                      />
-                    </div>
-                    <h5 className="card-title">Nombre: Pepito Muñoz </h5>
-                    <p className="card-text">
-                      Carrera Universitaria:
-                      {traitorProfile?.nom_unidad_acad_matriculado}
-                      <br />
-                      Edad: {fitProfile?.influentialElementsCampus?.map(
-                        (camp) => camp.category
-                      )}{" "}
-
-                      <br />
-                      Ciudad:{" "}
-                      {traitorProfile?.modalitiesPorc?.map(
-                        (mod) => mod.category
-                      )}{" "}
-                      <br />
-                      <br />
-                      Estado: xx <br />
-                      Tipo de sangre: xx <br />
-                      Promedio: xx <br />
-                      Horas que dormia: xx <br />
-                      Vio clases con Roberto? : F/V <br />
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <TraitorProfile
+                traitorProfile={traitorProfile}
+                fitProfile={fitProfile}
+                pathCondition = {pathCondition}
+              />
               <div className="col-sm-6">
                 <div className="card text-center">
                   <div className="card-body">
