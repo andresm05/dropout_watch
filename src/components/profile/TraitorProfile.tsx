@@ -1,4 +1,9 @@
+import { nanoid } from "nanoid";
+import { ProfileField } from ".";
 import { InfluentialElements, TraitorsTernary } from "../../utilities";
+import { ProfileRange } from "./ProfileRange";
+import { Dialog } from "@mui/material";
+import { useState } from "react";
 
 interface TraitorProfileProps {
   traitorProfile: TraitorsTernary | undefined;
@@ -11,6 +16,17 @@ const TraitorProfile = ({
   fitProfile,
   pathCondition,
 }: TraitorProfileProps) => {
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
   return (
     <div className="col-sm-6 mb-3 mb-sm-0">
       <div className="card">
@@ -26,113 +42,137 @@ const TraitorProfile = ({
           </div>
           <h5 className="card-title">Nombre: Pepito Muñoz </h5>
           <div className="card-body">
-            <div className="border border-light border border-2 rounded m-2">
-              <span className="fw-bold me-2 card-text">Unidad Académica:</span>
-              {traitorProfile?.nom_unidad_acad_matriculado.map(
-                (unidadAcad) => (
-                  <span>{unidadAcad} </span>
-                )
-              )}
+            <div className="row justify-content-center my-3">
+              <span className="fw-bold me-2 card-text ">Unidad Académica</span>
+              {traitorProfile?.nom_unidad_acad_matriculado.map((unidadAcad) => (
+                <span>{unidadAcad} </span>
+              ))}
             </div>
-            <div className="border border-light border border-2 rounded m-2">
-              <span className="fw-bold me-2 card-text">Tipo de Admisión:</span>
-
+            <div className="my-3">
+              <span className="row justify-content-center fw-bold card-text">
+                Tipo de admisión
+              </span>
               {fitProfile?.influentialElementsTypeOfAdmission.map(
                 (admission) => (
-                  <span>{admission.category} </span>
+                  <ProfileField field={admission} key={nanoid()} />
                 )
               )}
             </div>
-            <div className="border border-light border border-2 rounded m-2">
-              <span className="fw-bold me-2 card-text">Sede:</span>
-
+            <div className="my-3">
+              <span className="row justify-content-center fw-bold card-text">
+                Sede
+              </span>
               {fitProfile?.influentialElementsCampus.map((campus) => (
-                <span>{campus.category} </span>
+                <ProfileField field={campus} key={nanoid()} />
               ))}
             </div>
-            <div className="border border-light border border-2 rounded m-2">
-              <span className="fw-bold me-2 card-text">Versión:</span>
+
+            <div className="my-3">
+              <span className="row justify-content-center fw-bold card-text">
+                Versión
+              </span>
 
               {fitProfile?.influentialElementsVersion.map((version) => (
-                <span>{version.category} </span>
+                <ProfileField field={version} key={nanoid()} />
               ))}
             </div>
+
             {pathCondition === "pse" && (
-              <div className="border border-light border border-2 rounded m-2">
-                <span className="fw-bold me-2 card-text">Modalidad:</span>
+              <div className="my-3">
+                <span className="row justify-content-center fw-bold card-text">
+                  Modalidad
+                </span>
                 {fitProfile?.influentialElementsModalities.map((mod) => (
-                  <span>{mod.category} </span>
+                  <ProfileField field={mod} key={nanoid()} />
                 ))}
               </div>
             )}
             {pathCondition === "sme" && (
-              <div className="border border-light border border-2 rounded m-2">
-                <span className="fw-bold me-2 card-text">
-                  Programa académico:
+              <div className="my-3">
+                <span className="row justify-content-center fw-bold card-text">
+                  Programa académico
                 </span>
-                {fitProfile?.InfluentialElementsPrograms.map((program) => (
-                  <span>{program.category} </span>
+                {fitProfile?.InfluentialElementsPrograms.map((prog) => (
+                  <ProfileField field={prog} key={nanoid()} />
                 ))}
               </div>
             )}
             {pathCondition === "pme" && (
-              <div className="border border-light border border-2 rounded m-2">
-                <span className="fw-bold me-2 card-text">
-                  Total créditos aprobados:
+              <div className="my-3">
+                <span className="row justify-content-center fw-bold card-text">
+                  Total créditos aprobados{" "}
                 </span>
-                {fitProfile?.influentialElementsSemesterCredits.map(
-                  (credits) => (
-                    <span>{`[${credits.min}-${credits.max}] `} </span>
+                {fitProfile?.influentialElementsInitialCredits.map(
+                  (initCred) => (
+                    <ProfileRange credits={initCred} key={nanoid()} />
                   )
                 )}
               </div>
             )}
 
             {pathCondition === "psm" && (
-              <div className="border border-light border border-2 rounded m-2">
-                <span className="fw-bold me-2 card-text">
-                  Estrato socioeconómico:
+              <div className="my-3">
+                <span className="row justify-content-center fw-bold card-text">
+                  Estrato socioeconómico
                 </span>
                 {fitProfile?.influentialElementsEconomicLevel.map(
                   (economic) => (
-                    <span>{economic.category} </span>
+                    <ProfileField field={economic} key={nanoid()} />
                   )
                 )}
               </div>
             )}
-
-            <div className="border border-light border border-2 rounded m-2">
-              <span className="fw-bold me-2 card-text">
-                Créditos matriculados último semestre:
+            <div className="my-3">
+              <span className="row justify-content-center fw-bold card-text">
+                Créditos matriculados último semestre
               </span>
-              {fitProfile?.influentialElementsInitialCredits.map((initcred) => (
-                <span>{`[${initcred.min}-${initcred.max}] `} </span>
+              {fitProfile?.influentialElementsInitialCredits.map((initCred) => (
+                <ProfileRange credits={initCred} key={nanoid()} />
               ))}
             </div>
-            <div className="border border-light border border-2 rounded m-2">
-              <span className="fw-bold me-2 card-text">
-                Total créditos reprobados:
+            <div className="my-3">
+              <span className="row justify-content-center fw-bold card-text">
+                Total créditos reprobados
               </span>
               {fitProfile?.influentialElementsFailedCredits.map((failcred) => (
-                <span>{`[${failcred.min}-${failcred.max}] `} </span>
+                <ProfileRange credits={failcred} key={nanoid()} />
               ))}
             </div>
-            <div className="border border-light border border-2 rounded m-2">
-              <span className="fw-bold me-2 card-text">
-                Total créditos cancelados:
+            <div className="my-3">
+              <span className="row justify-content-center fw-bold card-text">
+                Total créditos cancelados
               </span>
               {fitProfile?.influentialElementsCancelledCredits.map(
                 (cancelcred) => (
-                  <span>{`[${cancelcred.min}-${cancelcred.max}] `} </span>
+                  <ProfileRange credits={cancelcred} key={nanoid()} />
                 )
               )}
             </div>
           </div>
-          <span className="fw-bold me-2 card-text">
-            Total encuestados: {traitorProfile?.totalTraitors}
-          </span>
+          <div className="d-flex align-items-center justify-content-between">
+            <span className="fw-bold me-2 card-text">
+              Total encuestados: {traitorProfile?.totalTraitors}
+            </span>
+            <h3 className="text-success" onClick={handleOpenDialog}>
+              <i className="bi bi-question-square-fill"></i>
+            </h3>
+          </div>
         </div>
       </div>
+      <Dialog onClose={handleCloseDialog} open={openDialog}>
+        <div className="d-flex justify-content-center align-items-center p-3">
+          <h2 className="text-danger m-2">
+            <i className="bi bi-exclamation-square-fill"></i>
+          </h2>
+          <span className="m-2">Indica que la variable es altamente influyente</span>
+        </div>
+        <div className="d-flex justify-content-center align-items-center p-3">
+          <h2 className="text-warning m-2">
+            <i className="bi bi-exclamation-square-fill"></i>
+          </h2>
+          <span className="m-2">Indica que la variable es medianamente influyente</span>
+        </div>
+      </Dialog>
     </div>
   );
 };
