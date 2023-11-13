@@ -13,20 +13,21 @@ import { Loadings } from "../helpers/Loadings";
 import { useParams } from "react-router-dom";
 import { TraitorProfile, VariableOptions } from "../components";
 import { useForm } from "../hooks/useForm";
-import { setPath } from "../helpers";
+import { Alerts, setPath } from "../helpers";
+import { validateFields } from "../utilities/tasks/ValidateFields";
 
 const Profile = () => {
   const { selectedVariables } = useParams();
   const { getTraitors, getTraitorsByTernary } = useDropouts();
-  const [traitors, setTraitors] = useState<Traitors | undefined>();
+  const [traitors, setTraitors] = useState<Traitors>();
   const [pathCondition, setPathCondition] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
   const [showCards, setShowCards] = useState(false);
-  const [traitorProfile, setTraitorProfile] = useState<
-    TraitorsTernary | undefined
-  >();
+  const [traitorProfile, setTraitorProfile] = useState<TraitorsTernary>();
   const [fitProfile, setFitProfile] = useState<InfluentialElements>();
   const [showInfo, setShowInfo] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [var1, var2, var3] = selectedVariables
     ? selectedVariables.split("-")
     : [];
@@ -44,6 +45,17 @@ const Profile = () => {
     const pathCond = getPathCondition(var1, var2, var3);
     setPathCondition(pathCond);
 
+    const errorMsg = validateFields(
+      values,
+      pathCond,
+      traitors?.maxSemester || 0
+    );
+    if (errorMsg) {
+      setErrorMessage(errorMsg);
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
     const fullpath = setPath(pathCond, values);
     console.log(fullpath);
     const profile = await getTraitorsByTernary(fullpath);
@@ -152,6 +164,9 @@ const Profile = () => {
             </div>
           </div>
           <div className="card text-body-secondary border-0">
+            {showError && (
+              <Alerts severity="error" message="Error" alert={errorMessage} />
+            )}
             <button className="btn btn-light" onClick={handleCreateProfile}>
               <img
                 src="\images\profile.png"
@@ -167,7 +182,7 @@ const Profile = () => {
               <TraitorProfile
                 traitorProfile={traitorProfile}
                 fitProfile={fitProfile}
-                pathCondition = {pathCondition}
+                pathCondition={pathCondition}
               />
               <div className="col-sm-6">
                 <div className="card text-center">
@@ -186,13 +201,12 @@ const Profile = () => {
             </div>
           )}
           {showInfo && (
-            <div className="card text-body-secondary border-0">
-              <div className="card-body">
-                <h5 className="card-title">Información</h5>
-                <p className="card-text">
-                  There is no profile that fullfil the conditions
-                </p>
-              </div>
+            <div className="m-4">
+              <Alerts
+                severity="success"
+                message="Great!"
+                alert="There is no profile that fullfil your conditions. Don't worry, you won't fail"
+              />
             </div>
           )}
         </div>

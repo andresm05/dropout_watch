@@ -20,7 +20,7 @@ export const DropdownVariable = ({
       onChange={handleFieldChange}
       className="form-control mt-2 w-75 mx-auto"
     >
-      <option defaultValue="">
+      <option defaultValue="" value="">
         None
       </option>
       {traitors?.[field]?.map((program) => (

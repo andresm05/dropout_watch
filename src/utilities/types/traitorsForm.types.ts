@@ -1,5 +1,5 @@
 export interface TraitorsForm {
-    economicLevel?: number;
+    economicLevel?: number | string;
     maxSemester?: number;
     modalities?: string;
     programs?: string;
