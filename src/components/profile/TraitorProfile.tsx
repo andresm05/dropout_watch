@@ -45,7 +45,7 @@ const TraitorProfile = ({
             <div className="row justify-content-center my-3">
               <span className="fw-bold me-2 card-text ">Unidad Académica</span>
               {traitorProfile?.nom_unidad_acad_matriculado.map((unidadAcad) => (
-                <span>{unidadAcad} </span>
+                <span key={nanoid()}>{unidadAcad}</span>
               ))}
             </div>
             <div className="my-3">
