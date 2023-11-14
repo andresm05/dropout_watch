@@ -29,6 +29,7 @@ const Profile = () => {
   const [traitors, setTraitors] = useState<Traitors>();
   const [pathCondition, setPathCondition] = useState<string>("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingCards, setIsLoadingCards] = useState(false);
   const [showCards, setShowCards] = useState(false);
   const [traitorProfile, setTraitorProfile] = useState<TraitorsTernary>();
   const [fitProfile, setFitProfile] = useState<InfluentialElements>();
@@ -49,9 +50,11 @@ const Profile = () => {
   const { values, handleFieldChange } = useForm(initialValues);
 
   const handleCreateProfile = async () => {
+    //get the path condition to build the route
     const pathCond = getPathCondition(var1, var2, var3);
     setPathCondition(pathCond);
 
+    //validate the fields
     const errorMsg = validateFields(
       values,
       pathCond,
@@ -63,13 +66,18 @@ const Profile = () => {
       return;
     }
     setShowError(false);
+    setShowCards(false);
+
+    //create the route and get the profile
     const fullpath = setPath(pathCond, values);
-    console.log(fullpath);
+    setIsLoadingCards(true);
     const profile = await getTraitorsByTernary(fullpath);
     if (profile) {
+      setIsLoadingCards(false);
       setTraitorProfile(profile);
       setFitProfile(getInfluentialElements(profile));
       console.log(profile);
+      //verify if the profile is empty
       if (profile.totalTraitors > 0) {
         setShowCards(true);
         setShowInfo(false);
@@ -178,6 +186,19 @@ const Profile = () => {
               <p>Crear perfil</p>
             </button>
           </div>
+          {isLoadingCards && (
+            <div className="d-flex flex-column justify-content-center align-items-center">
+              <Loadings
+                type="cylon"
+                color="#0d6efd
+              "
+              />
+              <h1 className="display-6 d-flex flex-column justify-content-center align-items-center">
+                "El único esfuerzo que se pierde es el que no se intenta",{" "}
+                <span className="text-primary ">Roberto Flórez</span> 
+              </h1>
+            </div>
+          )}
           {showCards && (
             <>
               <div className="row mt-4 mb-4 g-3 align-items-stretch">
