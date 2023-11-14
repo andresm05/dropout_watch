@@ -10,14 +10,21 @@ import {
   getPathCondition,
 } from "../utilities";
 import { Loadings } from "../helpers/Loadings";
-import { useParams } from "react-router-dom";
-import { TraitorProfile, VariableOptions } from "../components";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  GraphicView,
+  NavBar,
+  TraitorProfile,
+  VariableOptions,
+} from "../components";
 import { useForm } from "../hooks/useForm";
 import { Alerts, setPath } from "../helpers";
 import { validateFields } from "../utilities/tasks/ValidateFields";
+import { SecondGraphicView } from "../components/profile/graphics/SecondGraphicView";
 
 const Profile = () => {
   const { selectedVariables } = useParams();
+  const navegate = useNavigate();
   const { getTraitors, getTraitorsByTernary } = useDropouts();
   const [traitors, setTraitors] = useState<Traitors>();
   const [pathCondition, setPathCondition] = useState<string>("");
@@ -86,22 +93,16 @@ const Profile = () => {
 
   return (
     <div>
-      <nav className="navbar bg-body-tertiary ml-2">
-        <div className="container">
-          <div className="d-flex align-items-center">
-            <img
-              src="\images\DropoutWatchLogo.png"
-              alt="Logo"
-              width="80"
-              height="80"
-              className="d-inline-block"
-            />
-            <h1 className="display-6 mx-2">Dropout</h1>
-            <h1 className="mt-0 text-primary">Watch </h1>
-            <h1 className="display-6 mx-2   ">Profile</h1>
-          </div>
-        </div>
-      </nav>
+      <div className="d-flex justify-content-between align-items-center mx-5">
+        <NavBar page="Profile" />
+        <button
+          className="btn btn-outline-primary h-50"
+          onClick={() => navegate(-1)}
+        >
+          <i className="bi bi-arrow-left-circle-fill me-2"></i>
+          <span>Regresar</span>
+        </button>
+      </div>
 
       {isLoading ? (
         <div className="d-flex flex-column justify-content-center align-items-center">
@@ -178,27 +179,25 @@ const Profile = () => {
             </button>
           </div>
           {showCards && (
-            <div className="row mt-4 mb-4">
-              <TraitorProfile
-                traitorProfile={traitorProfile}
-                fitProfile={fitProfile}
-                pathCondition={pathCondition}
-              />
-              <div className="col-sm-6">
-                <div className="card text-center">
-                  <div className="card-body">
-                    <h5 className="card-title">Estadisticas</h5>
-                    <p className="card-text">
-                      With supporting text below as a natural lead-in to
-                      additional content.
-                    </p>
-                    <a href="#" className="btn btn-primary">
-                      Go somewhere
-                    </a>
-                  </div>
-                </div>
+            <>
+              <div className="row mt-4 mb-4 g-3 align-items-stretch">
+                <TraitorProfile
+                  traitorProfile={traitorProfile}
+                  fitProfile={fitProfile}
+                  pathCondition={pathCondition}
+                />
+                <GraphicView
+                  traitors={traitorProfile}
+                  pathCondition={pathCondition}
+                />
               </div>
-            </div>
+              <div className="row align-items-stretch">
+                <SecondGraphicView
+                  traitors={traitorProfile}
+                  pathCondition={pathCondition}
+                />
+              </div>
+            </>
           )}
           {showInfo && (
             <div className="m-4">

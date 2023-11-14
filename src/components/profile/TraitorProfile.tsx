@@ -26,8 +26,8 @@ const TraitorProfile = ({
   };
 
   return (
-    <div className="col-sm-6 mb-3 mb-sm-0">
-      <div className="card">
+    <div className="col-sm-6 mb-3 mb-sm-0 d-flex">
+      <div className="card bg-light">
         <div className="card-body text-center">
           <div>
             <img
@@ -105,7 +105,7 @@ const TraitorProfile = ({
               range={true}
             />
           </div>
-          <div className="d-flex align-items-center justify-content-between">
+          <div className="d-flex align-items-center justify-content-between mt-5">
             <span className="fw-bold me-2 card-text">
               Total encuestados: {traitorProfile?.totalTraitors}
             </span>
