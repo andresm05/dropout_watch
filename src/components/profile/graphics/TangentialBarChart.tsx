@@ -16,10 +16,19 @@ export const tangentialBarChart = (
       left: "left",
       top: "0%",
     },
-
-    polar: {
-      radius: [30, "80%"],
+    toolbox: {
+      show: true,
+      feature: {
+        mark: { show: true },
+        dataView: { show: true, readOnly: false },
+        restore: { show: true },
+        saveAsImage: { show: true },
+      },
     },
+    polar: {
+      radius: [30, "85%"],
+    },
+
     angleAxis: {
       max: 1,
       startAngle: 75,
@@ -33,12 +42,7 @@ export const tangentialBarChart = (
       type: "bar",
       data: values,
       coordinateSystem: "polar",
-      color: "#2E86C1",
-      label: {
-        show: true,
-        position: "right",
-        formatter: "{b}",
-      },
+      color: "rgba(255,127,80,1)",
     },
   };
   return option;

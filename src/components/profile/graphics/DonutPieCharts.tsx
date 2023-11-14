@@ -20,15 +20,24 @@ export const donutPieCharts = (
     tooltip: {
       trigger: "item",
     },
+    toolbox: {
+      show: true,
+      feature: {
+        mark: { show: true },
+        dataView: { show: true, readOnly: false },
+        restore: { show: true },
+        saveAsImage: { show: true },
+      },
+    },
     legend: {
-      bottom: "-10%",
+      bottom: "0%",
       left: "center",
     },
     series: [
       {
         name: "Access From",
         type: "pie",
-        radius: ["40%", "70%"],
+        radius: ["20%", "50%"],
         avoidLabelOverlap: false,
         label: {
           show: false,

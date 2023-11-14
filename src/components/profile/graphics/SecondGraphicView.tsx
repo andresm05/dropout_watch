@@ -1,8 +1,10 @@
 import ReactECharts from "echarts-for-react";
-import { pieCharts } from "./PieCharts";
 import { ElementPorc, Range, TraitorsTernary } from "../../../utilities";
-import { tangentialBarChart } from "./TangentialBarChart";
 import { BarCharts } from "./BarCharts";
+import { nightingaleCharts } from "./NightingaleChart";
+import { tangentialBarChart } from "./TangentialBarChart";
+import { pieCharts } from "./PieCharts";
+import { radiarPolarBarChart } from "./RadiarPolarBarChart";
 
 type Fields = ElementPorc[] | Range[] | undefined;
 
@@ -15,7 +17,7 @@ export const SecondGraphicView = ({ traitors }: GraphicViewProps) => {
   const existField = (field: Fields) => {
     return field === undefined || field.length === 0 ? false : true;
   };
-  const chartModalities = pieCharts(
+  const chartModalities = tangentialBarChart(
     traitors?.modalitiesPorc || [],
     false,
     "Modalidad"
@@ -27,14 +29,49 @@ export const SecondGraphicView = ({ traitors }: GraphicViewProps) => {
     "Programa Académico"
   );
 
+  const chartFailedCredits = nightingaleCharts(
+    traitors?.failedCreditRanges || [],
+    true,
+    "Créditos Reprobados"
+  );
+
+  const chartCanceledCredits = pieCharts(
+    traitors?.CancelledCreditRanges || [],
+    true,
+    "Créditos Cancelados"
+  );
+
+  const chartEconomicLevel = nightingaleCharts(
+    traitors?.economicLevelPorc || [],
+    false,
+    "Nivel Económico"
+  );
+
+  const chartTotalCredits = radiarPolarBarChart(
+    traitors?.semesterCreditsRanges || [],
+    true,
+    "Total créditos aprobados"
+  )
+
   return (
     <div className="card text-center bg-light">
       <div className="card-body">
         <h5 className="card-title">Estadisticas</h5>
-        <div className="d-flex flex-column justify-content-center p-5">
+        <div className="d-flex flex-column justify-content-center m-5">
+          {existField(traitors?.modalitiesPorc) && (
+            <ReactECharts option={chartModalities} />
+          )}
           {existField(traitors?.programsPrc) && (
             <ReactECharts option={chartPrograms} />
           )}
+          {existField(traitors?.economicLevelPorc) && (
+            <ReactECharts option={chartEconomicLevel} />
+          )}
+          {existField(traitors?.semesterCreditsRanges) && (
+            <ReactECharts option={chartTotalCredits} />
+          )}
+          <ReactECharts option={chartFailedCredits} />
+          <ReactECharts option={chartCanceledCredits} />
         </div>
       </div>
     </div>

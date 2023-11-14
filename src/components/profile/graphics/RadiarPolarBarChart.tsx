@@ -1,10 +1,10 @@
 import { ElementPorc, Range } from "../../../utilities";
-import { getSeparatedData } from ".";
+import { getSeparatedData } from "./";
 import { ECOption } from "./ChartsConfig";
 
 type Fields = ElementPorc | Range;
 
-export const BarCharts = (
+export const radiarPolarBarChart = (
   traitors: Fields[],
   range: boolean,
   titleGraph: string
@@ -12,15 +12,11 @@ export const BarCharts = (
   const { names, values } = getSeparatedData(traitors, range);
   const option: ECOption = {
     title: {
-      text: `${titleGraph}`,
-      left: "center",
+      text: titleGraph,
+        left: "center",
     },
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "shadow",
-      },
-      formatter: "{b}: {c}",
+    polar: {
+      radius: [30, "70%"],
     },
     toolbox: {
       show: true,
@@ -31,27 +27,21 @@ export const BarCharts = (
         saveAsImage: { show: true },
       },
     },
-
-    axisPointer: {
-      type: "shadow",
+    radiusAxis: {
+      max: 1,
     },
-    xAxis: {
+    angleAxis: {
       type: "category",
       data: names,
-      axisLabel: {
-        show: false,
-      },
+      startAngle: 75,
     },
-    yAxis: {
-      type: "value",
+    tooltip: {},
+    series: {
+      type: "bar",
+      data: values,
+      coordinateSystem: "polar",
+      color: "rgba(184,134,11,1)",
     },
-    series: [
-      {
-        data: values,
-        type: "bar",
-        color: "rgba( 0, 128, 128, 1 )",
-      },
-    ],
   };
   return option;
 };

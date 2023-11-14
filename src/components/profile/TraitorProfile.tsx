@@ -96,7 +96,7 @@ const TraitorProfile = ({
 
             <ItemProfile
               elements={fitProfile?.influentialElementsFailedCredits || []}
-              title="Total Crédtitos reprobados"
+              title="Total Créditos reprobados"
               range={true}
             />
             <ItemProfile

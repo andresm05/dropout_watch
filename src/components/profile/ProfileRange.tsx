@@ -17,7 +17,11 @@ export const ProfileRange = ({ credits }: ProfileRangeProps) => {
         }`}
         onMouseOver={() => setHover(true)}
         onMouseOut={() => setHover(false)}
-      >{`[${credits.min}-${credits.max}] `}</span>
+      >
+        {credits.min === credits.max
+          ? `${credits.min}`
+          : `[${credits.min}-${credits.max}]`}
+      </span>
 
       <InfluentialButton rate={credits.traitors} />
     </div>

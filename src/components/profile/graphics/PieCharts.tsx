@@ -14,9 +14,19 @@ export const pieCharts = (
     title: {
       text: `${titleGraph}`,
       left: "center",
-      bottom: "5%",
+      top: "5%",
     },
     tooltip: {},
+
+    toolbox: {
+      show: true,
+      feature: {
+        mark: { show: true },
+        dataView: { show: true, readOnly: false },
+        restore: { show: true },
+        saveAsImage: { show: true },
+      },
+    },
 
     series: [
       {

@@ -1,26 +1,24 @@
+import { getData } from ".";
 import { ElementPorc, Range } from "../../../utilities";
-import { getSeparatedData } from ".";
 import { ECOption } from "./ChartsConfig";
 
 type Fields = ElementPorc | Range;
 
-export const BarCharts = (
+export const nightingaleCharts = (
   traitors: Fields[],
   range: boolean,
   titleGraph: string
 ): ECOption => {
-  const { names, values } = getSeparatedData(traitors, range);
+  const graphicData = getData(traitors, range);
   const option: ECOption = {
     title: {
       text: `${titleGraph}`,
       left: "center",
+      top: "0%",
     },
+
     tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "shadow",
-      },
-      formatter: "{b}: {c}",
+      trigger: "item",
     },
     toolbox: {
       show: true,
@@ -31,25 +29,17 @@ export const BarCharts = (
         saveAsImage: { show: true },
       },
     },
-
-    axisPointer: {
-      type: "shadow",
-    },
-    xAxis: {
-      type: "category",
-      data: names,
-      axisLabel: {
-        show: false,
-      },
-    },
-    yAxis: {
-      type: "value",
-    },
     series: [
       {
-        data: values,
-        type: "bar",
-        color: "rgba( 0, 128, 128, 1 )",
+        name: "Nightingale Chart",
+        type: "pie",
+        radius: [50, 100],
+        center: ["50%", "50%"],
+        roseType: "area",
+        itemStyle: {
+          borderRadius: 8,
+        },
+        data: graphicData,
       },
     ],
   };
