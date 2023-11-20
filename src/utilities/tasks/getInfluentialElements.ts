@@ -58,6 +58,7 @@ if (traitors.programsPrc) {
   InfluentialElementsPrograms = getMaxElement(traitors.programsPrc);
 }
   return {
+    nom_unidad_acad_matriculado: traitors.nom_unidad_acad_matriculado,
     influentialElementsTypeOfAdmission,
     influentialElementsCampus,
     influentialElementsVersion,

@@ -12,6 +12,7 @@ import {
 import { Loadings } from "../helpers/Loadings";
 import { useNavigate, useParams } from "react-router-dom";
 import {
+  GenerateReport,
   GraphicView,
   NavBar,
   TraitorProfile,
@@ -31,6 +32,7 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingCards, setIsLoadingCards] = useState(false);
   const [showCards, setShowCards] = useState(false);
+  const [fullPath, setFullPath] = useState<string>("");
   const [traitorProfile, setTraitorProfile] = useState<TraitorsTernary>();
   const [fitProfile, setFitProfile] = useState<InfluentialElements>();
   const [showInfo, setShowInfo] = useState(false);
@@ -70,6 +72,7 @@ const Profile = () => {
 
     //create the route and get the profile
     const fullpath = setPath(pathCond, values);
+    setFullPath(fullpath);
     setIsLoadingCards(true);
     const profile = await getTraitorsByTernary(fullpath);
     if (profile) {
@@ -175,7 +178,7 @@ const Profile = () => {
             {showError && (
               <Alerts severity="error" message="Error" alert={errorMessage} />
             )}
-            <button className="btn btn-light" onClick={handleCreateProfile}>
+            <button className="btn btn-light col-xs-12 col-md-6 mx-auto" onClick={handleCreateProfile}>
               <img
                 src="\images\profile.png"
                 alt="Icono"
@@ -194,13 +197,17 @@ const Profile = () => {
               />
               <h1 className="display-6 d-flex flex-column justify-content-center align-items-center">
                 "El único esfuerzo que se pierde es el que no se intenta",{" "}
-                <span className="text-primary ">Roberto Flórez</span> 
+                <span className="text-primary ">Roberto Flórez</span>
               </h1>
             </div>
           )}
           {showCards && (
+            //this show the profile and graphics
             <>
-              <div className="row mt-4 mb-4 g-3 align-items-stretch">
+              <div className="d-flex justify-content-end align-items-center mt-2">
+                <GenerateReport fullPath={fullPath} />
+              </div>
+              <div className="row mt-2 mb-4 g-3 align-items-stretch">
                 <TraitorProfile
                   traitorProfile={traitorProfile}
                   fitProfile={fitProfile}

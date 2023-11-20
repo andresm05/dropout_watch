@@ -5,11 +5,12 @@ import { Traitors, TraitorsTernary } from "../utilities";
 import Swal from "sweetalert2";
 
 export const useDropouts = () => {
+  const path = "/traitors";
   const [error, setError] = useState<string | null>(null);
 
   const getTraitors = async () => {
     try {
-      const { data } = await dropoutWatchApi.get<Traitors>("/");
+      const { data } = await dropoutWatchApi.get<Traitors>(path);
       return data;
     } catch (error) {
       const err = error as AxiosError;
@@ -27,7 +28,7 @@ export const useDropouts = () => {
 
   const getTraitorsByTernary = async (endpoint : string) => {
     try {
-      const { data } = await dropoutWatchApi.get<TraitorsTernary>(endpoint);
+      const { data } = await dropoutWatchApi.get<TraitorsTernary>(`${path}${endpoint}`);
       return data;
     } catch (error) {
       const err = error as AxiosError;
