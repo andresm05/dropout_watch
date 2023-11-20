@@ -54,25 +54,38 @@ export const SecondGraphicView = ({ traitors }: GraphicViewProps) => {
   )
 
   return (
-    <div className="card text-center bg-light">
+    <div className="card text-center border border-light">
       <div className="card-body">
-        <h5 className="card-title">Estadisticas</h5>
-        <div className="d-flex flex-column justify-content-center m-5">
-          {existField(traitors?.modalitiesPorc) && (
-            <ReactECharts option={chartModalities} />
-          )}
-          {existField(traitors?.programsPrc) && (
-            <ReactECharts option={chartPrograms} />
-          )}
-          {existField(traitors?.economicLevelPorc) && (
-            <ReactECharts option={chartEconomicLevel} />
-          )}
-          {existField(traitors?.semesterCreditsRanges) && (
-            <ReactECharts option={chartTotalCredits} />
-          )}
-          <ReactECharts option={chartFailedCredits} />
-          <ReactECharts option={chartCanceledCredits} />
-        </div>
+        <h5 className="card-title text-primary">Estadisticas adicionales</h5>
+        <div className="d-flex flex-row justify-content-center m-5">
+  {existField(traitors?.modalitiesPorc) && (
+    <div className="col-md-6">
+      <ReactECharts option={chartModalities} />
+    </div>
+  )}
+  {existField(traitors?.programsPrc) && (
+    <div className="col-md-6">
+      <ReactECharts option={chartPrograms} />
+    </div>
+  )}
+  {existField(traitors?.economicLevelPorc) && (
+    <div className="col-md-6">
+      <ReactECharts option={chartEconomicLevel} />
+    </div>
+  )}
+  {existField(traitors?.semesterCreditsRanges) && (
+    <div className="col-md-6">
+      <ReactECharts option={chartTotalCredits} />
+    </div>
+  )}
+  <div className="col-md-6">
+    <ReactECharts option={chartFailedCredits} />
+  </div>
+  <div className="col-md-6">
+    <ReactECharts option={chartCanceledCredits} />
+  </div>
+</div>
+
       </div>
     </div>
   );

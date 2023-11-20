@@ -26,8 +26,8 @@ const TraitorProfile = ({
   };
 
   return (
-    <div className="col-sm-6 mb-3 mb-sm-0 d-flex">
-      <div className="card bg-light">
+    <div className="col-sm-6 mb-3 mb-sm-0 d-flex ">
+      <div className="card border border-light">
         <div className="card-body text-center">
           <div>
             <img
@@ -38,9 +38,10 @@ const TraitorProfile = ({
               height="80"
             />
           </div>
-          <h5 className="card-title">Nombre: Pepito Muñoz </h5>
+          <h5 className=" fw-bold me-1 card-title">Nombre </h5>
+          <p className="">Pepito Muñoz</p>
           <div className="card-body">
-            <div className="row justify-content-center my-3">
+            <div className="row justify-content-center my-2">
               <span className="fw-bold me-2 card-text ">Unidad Académica</span>
               {traitorProfile?.nom_unidad_acad_matriculado.map((unidadAcad) => (
                 <span key={nanoid()}>{unidadAcad}</span>
@@ -106,7 +107,7 @@ const TraitorProfile = ({
             />
           </div>
           <div className="d-flex align-items-center justify-content-between mt-5">
-            <span className="fw-bold me-2 card-text">
+            <span className="fw-bold me-2 card-text text-primary">
               Total encuestados: {traitorProfile?.totalTraitors}
             </span>
             <button

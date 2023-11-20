@@ -13,19 +13,19 @@ export const ShowInfo = ({ handleCloseDialog, openDialog }: ShowInfoProps) => {
         <div className="d-flex flex-col m-3">
           <InfluentialButton rate={0.8} />
           <span className="m-2">
-            Indica que la variable es altamente influyente
-            <p className="row text-primary fw-lighter">
-              Esto signifíca que más del 80% de los encuestados cumplen la
-              condición
+            Indica que la variable  es <span className="text-primary"> altamente influyente</span> 
+            <p className="row">
+              Más del 80% de los encuestados cumplen la
+              condición 
             </p>
           </span>
         </div>
         <div className="d-flex flex-col m-3">
           <InfluentialButton rate={0.5} />
           <span className="m-2">
-            Indica que la variable es medianamente influyente
-            <p className="row text-primary fw-lighter">
-              Esto signifíca que más del 50% y menos del 80% de los encuestados
+            Indica que la variable es <span className="text-primary">medianamente influyente</span>
+            <p className="row">
+              Más del 50% y menos del 80% de los encuestados
               cumplen la condición
             </p>
           </span>

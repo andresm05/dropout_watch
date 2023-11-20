@@ -116,8 +116,7 @@ const Profile = () => {
         <div className="d-flex flex-column justify-content-center align-items-center">
           <Loadings
             type="cylon"
-            color="#0d6efd
-"
+            color="#0d6efd"
           />
           <h1 className="display-6">
             " No canceles compa, <span className="text-primary ">LÚCHALA </span>{" "}
@@ -224,8 +223,8 @@ const Profile = () => {
             <div className="m-4">
               <Alerts
                 severity="success"
-                message="Great!"
-                alert="There is no profile that fullfil your conditions. Don't worry, you won't fail"
+                message="¡Ups!"
+                alert="Aún no tenemos suficiente información para generar un perfil que satisfaga las condiciones dadas, Intenta con otro rango de valores en tus valiables. "
               />
             </div>
           )}

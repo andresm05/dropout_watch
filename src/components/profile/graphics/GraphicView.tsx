@@ -16,16 +16,15 @@ export const GraphicView = ({ traitors }: GraphicViewProps) => {
   const chartVersion = tangentialBarChart(traitors?.versionPorc || [], false, "Versión");
   return (
     <div className="col-sm-6">
-      <div className="card text-center bg-light">
+      <div className="card text-center border border-light">
         <div className="card-body">
-          <h5 className="card-title">Estadisticas</h5>
+          <h5 className="card-title text-primary">Estadisticas</h5>
           <div className="d-flex flex-column justify-content-center m-2">
             <ReactECharts option={chartTypeOfAdmission} />
             <ReactECharts option={chartVersion} />
             <ReactECharts option={chartCampus} />
-
           </div>
-        </div>
+        </div>  
       </div>
     </div>
   );
