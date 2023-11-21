@@ -39,7 +39,7 @@ const TraitorProfile = ({
             />
           </div>
           <h5 className=" fw-bold me-1 card-title">Nombre </h5>
-          <p className="">Pepito Muñoz</p>
+          <p className="">Oscar Camilo lopera</p>
           <div className="card-body">
             <div className="row justify-content-center my-2">
               <span className="fw-bold me-2 card-text ">Unidad Académica</span>
