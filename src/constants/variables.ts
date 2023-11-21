@@ -1,7 +1,7 @@
 export const pathOptions = [
 {
 
-  ternary: new Set<string>(["Semestre", "Modalidad", "Estrato socioeconómico"]),
+  ternary: new Set<string>(["Créditos acumulados", "Modalidad", "Estrato socioeconómico"]),
   path: 'sme'
 },
 {
@@ -9,11 +9,11 @@ export const pathOptions = [
   path: 'pme'
 },
 {
-  ternary: new Set<string>(["Carrera universitaria","Semestre", "Modalidad"]),
+  ternary: new Set<string>(["Carrera universitaria","Créditos acumulados", "Modalidad"]),
   path: 'psm'
 },
 {
-  ternary: new Set<string>(["Carrera universitaria","Semestre", "Estrato socioeconómico"]),
+  ternary: new Set<string>(["Carrera universitaria","Créditos acumulados", "Estrato socioeconómico"]),
   path: 'pse'
 }
 

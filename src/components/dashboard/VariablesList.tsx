@@ -21,7 +21,7 @@ export const VariablesList = ({
         setSelectedVariables={setSelectedVariables}
       />
       <SelectionButton
-        name={"Semestre"}
+        name={"Créditos acumulados"}
         selectedVariables={selectedVariables}
         icon="graduate.png"
         setErrorMessage={setErrorMessage}

@@ -28,7 +28,7 @@ export const VariableOptions = ({
       {variable === "Modalidad" && (
         <DropdownVariable traitors={traitors} field="modalities" handleFieldChange={handleFieldChange}/>
       )}
-      {variable === "Semestre" && (
+      {variable === "Créditos acumulados" && (
         <InputVariable traitors={traitors} field="maxSemester" handleFieldChange={handleFieldChange}/>
       )}
     </>
