@@ -56,9 +56,8 @@ export const SecondGraphicView = ({ traitors }: GraphicViewProps) => {
   return (
     <div className="card text-center border border-light">
       <div className="card-body">
-        <h5 className="card-title text-primary">Estadisticas adicionales</h5>
-        <div className="container">
-          <div className="row">
+        <h5 className="card-title text-primary">Estadísticas adicionales</h5>
+        <div className="d-flex flex-wrap justify-content-center m-5">
             {existField(traitors?.modalitiesPorc) && (
               <div className="col-lg-6 mb-4">
                 <ReactECharts option={chartModalities} />
@@ -87,7 +86,6 @@ export const SecondGraphicView = ({ traitors }: GraphicViewProps) => {
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 };
