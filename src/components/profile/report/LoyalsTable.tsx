@@ -8,21 +8,24 @@ type LoyalsTableProps = {
 
 const LoyalsTable = ({loyalData}: LoyalsTableProps) => {
   return (
-    <table className="table table-striped table table-hover table table-sm">
-    <thead>
+    <table className="table  table-hover table-sm">
+  <thead className="bg-primary text-white">
+    <tr>
       <th className="p-2 text-center" scope="col">
         ID
       </th>
       <th className="p-2 text-center" scope="col">
-        Estado Académico
+        Estado académico
       </th>
-    </thead>
-    <tbody className="table-group-divider">
-      {loyalData?.loyals.map((loyal) => (
-        <LoyalsTableContent loyal={loyal} key={loyal.id}/>
-      ))}
-    </tbody>
-  </table>
+    </tr>
+  </thead>
+  <tbody>
+    {loyalData?.loyals.map((loyal) => (
+      <LoyalsTableContent loyal={loyal} key={loyal.id}/>
+    ))}
+  </tbody>
+</table>
+
   )
 }
 

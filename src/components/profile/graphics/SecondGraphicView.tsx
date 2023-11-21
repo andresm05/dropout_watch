@@ -55,8 +55,11 @@ export const SecondGraphicView = ({ traitors }: GraphicViewProps) => {
 
   return (
     <div className="card text-center border border-light">
-      <div className="card-body">
-        <h5 className="card-title text-primary">Estadisticas adicionales</h5>
+      <div className="card-body mx-3">
+        <div className="mb-5">
+        <h5 className="card-title text-primary fw-bold">Estadisticas adicionales</h5>
+
+        </div>
         <div className="container">
       <div className="row">
         {existField(traitors?.modalitiesPorc) && (

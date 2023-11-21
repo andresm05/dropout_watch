@@ -37,30 +37,35 @@ export const GenerateReport = ({ fullPath }: GenerateReportProps) => {
       </button>
       <Dialog open={showReport} onClose={handleCloseDialog}>
         {loyalData?.loyals.length === 0 ? (
-            <div className="d-flex justify-content-center align-items-center m-3">
-
-                <Alerts
-                  severity="info"
-                  alert="No hay información para mostrar"
-                  message="sin Resultados"
-                />
-            </div>
+          <div className="d-flex justify-content-center align-items-center m-3">
+            <Alerts
+              severity="info"
+              alert="No hay información para mostrar"
+              message="Sin resultados"
+            />
+          </div>
         ) : (
           <>
             <div className="p-3 d-flex flex-column justify-content-center">
-              <h3 className="text-center fw-light text-primary">
-                Estudiantes matriculados en el período 2023-1 que están en
-                riesgo de desertar bajo estas condiciones
+              <h3 className="text-center">
+                <span className=" text-primary">Estudiantes</span>{" "}
+                <span className="fw-light">matriculados en el período</span>{" "}
+                <span className=" text-primary">2023-1</span>{" "}
+                <span className="fw-light">que están en</span>
+                <span className="text-primary"> riesgo de desertar</span>
+                <span className="fw-light"> bajo
+                estas condiciones</span> 
               </h3>
 
               <LoyalsTable loyalData={loyalData} />
-            </div>
-            <button
+              <button
               className="btn btn-outline-danger w-25 align-items-center m-2"
               onClick={handleCloseDialog}
             >
               Salir
             </button>
+            </div>
+
           </>
         )}
       </Dialog>
